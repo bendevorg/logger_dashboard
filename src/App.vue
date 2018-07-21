@@ -11,7 +11,7 @@
       {{ error }}
     </div>
     <div v-if="post">
-      <app-navmenu/>
+      <app-toolbar/>
       <router-view/>
     </div>
   </v-app>
@@ -19,10 +19,12 @@
 
 <script>
 import API from './utils/API';
+import Toolbar from './components/Shared/Toolbar';
 
 export default {
   name: 'App',
   components: {
+    appToolbar: Toolbar 
   },
   data() {
     return {
@@ -32,7 +34,6 @@ export default {
     };
   },
   created() {
-    console.log('a');
     this.loading = false;
     this.post = true;
   },
