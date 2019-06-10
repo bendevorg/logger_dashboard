@@ -1,5 +1,4 @@
-import Content from './components/shared/Content.vue';
-import List from './components/List.vue';
+import List from './components/Log/List.vue';
 
 const routes = [
   {

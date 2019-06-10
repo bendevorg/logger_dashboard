@@ -5,15 +5,19 @@
     <v-layout
       justify-center
       align-center>
-  
       <v-flex xs8 sm8>
         <v-card>
-          <v-list>
+          <v-list class="pa-0">
             <template v-for="(item, index) in items">
               <v-list-tile
                 :key="item.title"
                 avatar
                 ripple
+                class="pb-3"
+                :class="{
+                  'pt-3': index == 0,
+                  'mt-3': index > 0
+                }"
                 @click="toggle(index)"
               >
                 <v-list-tile-content>
@@ -33,7 +37,7 @@
                 </v-list-tile-content>
 
                 <v-list-tile-content>
-                  <v-chip label color="pink" text-color="white">
+                  <v-chip label color="white" text-color="black">
                     {{ item.method }}
                   </v-chip>
                 </v-list-tile-content>
