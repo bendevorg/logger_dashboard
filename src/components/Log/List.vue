@@ -3,62 +3,30 @@
     fluid 
     fill-height>
     <v-layout
-      justify-center
-      align-center>
+      justify-space-around
+      align-start>
       <v-flex xs8 sm8>
         <v-card>
           <v-list class="pa-0">
-            <template v-for="(item, index) in items">
-              <v-list-tile
-                :key="item.title"
-                avatar
-                ripple
-                class="pb-3"
-                :class="{
-                  'pt-3': index == 0,
-                  'mt-3': index > 0
-                }"
-                @click="toggle(index)"
-              >
-                <v-list-tile-content>
-                  <v-flex>
-                    <div>
-                      <h3><v-icon>alarm</v-icon> {{ item.time }}</h3>
-                    </div>
-                  </v-flex>
-                  <v-chip v-if="item.status == 200 || item.status == 201" color="green" text-color="white"  small="true">
-                    {{ item.status }}
-                  </v-chip>
-                  <v-chip v-else color="red" text-color="white"  small="true">
-                    {{ item.status }}
-                  </v-chip>
-       
-                  
-                </v-list-tile-content>
-
-                <v-list-tile-content>
-                  <v-chip label color="white" text-color="black">
-                    {{ item.method }}
-                  </v-chip>
-                </v-list-tile-content>
-
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.app }}</v-list-tile-title>
-                  <v-list-tile-sub-title>{{ item.path }}</v-list-tile-sub-title>
-                </v-list-tile-content>
-
-                <v-list-tile-action>
-                  <v-chip label color="orange" text-color="white">
-                    <v-icon>av_timer</v-icon> {{ item.responseTime }}ms
-                  </v-chip>
-                </v-list-tile-action>
-
-              </v-list-tile>
+            <div
+              v-for="(item, index) in items"
+              :key="index"
+            >
+              <app-log 
+                :time="item.time"
+                :status="item.status"
+                :method="item.method"
+                :app="item.app"
+                :path="item.path"
+                :responseTime="item.responseTime"
+                :index="index"
+                :length="items.length"
+              />
               <v-divider
-                v-if="index + 1 < items.length"
+                v-if="index < items.length - 1"
                 :key="index"
               ></v-divider>
-            </template>
+            </div>
           </v-list>
         </v-card>
       </v-flex>
@@ -67,10 +35,14 @@
 </template>
 
 <script>
+import Log from './Log';
 
 export default {
   name: 'List',
-  data(){
+  components: {
+    appLog: Log
+  },
+  data() {
     return {
       selected: [1],
       items: [{
@@ -109,7 +81,5 @@ export default {
   },
   props: {
   },
-  components: {
-  }
 };
 </script>
