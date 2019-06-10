@@ -11,20 +11,18 @@
       {{ error }}
     </div>
     <div v-if="post">
-      <app-toolbar/>
-      <router-view/>
+      <app-content />
     </div>
   </v-app>
 </template>
 
 <script>
-import API from './utils/API';
-import Toolbar from './components/Shared/Toolbar';
+import Content from './components/shared/Content';
 
 export default {
   name: 'App',
   components: {
-    appToolbar: Toolbar 
+    appContent: Content 
   },
   data() {
     return {
