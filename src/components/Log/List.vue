@@ -7,27 +7,25 @@
       align-start>
       <v-flex xs8 sm8>
         <v-card>
-          <v-list class="pa-0">
-            <div
+          <v-expansion-panel>
+            <v-expansion-panel-content
               v-for="(item, index) in items"
               :key="index"
             >
-              <app-log 
-                :time="item.time"
-                :status="item.status"
-                :method="item.method"
-                :app="item.app"
-                :path="item.path"
-                :responseTime="item.responseTime"
-                :index="index"
-                :length="items.length"
-              />
-              <v-divider
-                v-if="index < items.length - 1"
-                :key="index"
-              ></v-divider>
-            </div>
-          </v-list>
+              <template v-slot:header>
+                <app-log-summary 
+                  :time="item.time"
+                  :status="item.status"
+                  :method="item.method"
+                  :app="item.app"
+                  :path="item.path"
+                  :responseTime="item.responseTime"
+                  :index="index"
+                  :length="items.length"
+                />
+              </template>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
         </v-card>
       </v-flex>
     </v-layout>
@@ -35,12 +33,12 @@
 </template>
 
 <script>
-import Log from './Log';
+import LogSummary from './LogSummary';
 
 export default {
   name: 'List',
   components: {
-    appLog: Log
+    appLogSummary: LogSummary
   },
   data() {
     return {
