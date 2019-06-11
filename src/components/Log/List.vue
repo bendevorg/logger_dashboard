@@ -4,7 +4,9 @@
     fill-height>
     <v-layout
       justify-space-around
-      align-start>
+      align-start
+      wrap
+    >
       <v-flex xs8 sm8>
         <v-expansion-panel>
           <v-expansion-panel-content
@@ -13,14 +15,13 @@
           >
             <template v-slot:header>
               <log-summary 
-                :time="log.time"
-                :status="log.status"
-                :method="log.method"
-                :app="log.app"
-                :path="log.path"
-                :responseTime="log.responseTime"
+                :time="log.req.date"
+                :status="log.res.statusCode"
+                :method="log.req.method"
+                :app="log.req.base"
+                :path="log.req.path"
+                :responseTime="log.res.time"
                 :index="index"
-                :length="log.length"
               />
             </template>
             <log-detail
@@ -29,6 +30,14 @@
             />
           </v-expansion-panel-content>
         </v-expansion-panel>
+      </v-flex>
+      <v-flex xs12 class="text-xs-center">
+        <v-btn 
+          v-if="logs.length % 10 === 0"
+          @click="getMoreLogs"
+        >
+          Show more
+        </v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -46,7 +55,7 @@ export default {
     LogDetail,
   },
   created() {
-    this.retrieveLogs(10);
+    this.getMoreLogs();
   },
   computed: {
     ...mapState('log', {
@@ -55,6 +64,12 @@ export default {
   },
   methods: {
     ...mapActions('log', ['retrieveLogs']),
-  }
+    getMoreLogs() {
+      this.retrieveLogs({
+        amount: 10,
+        offset: this.logs.length
+      });
+    }
+  },
 };
 </script>
