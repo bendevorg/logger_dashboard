@@ -6,78 +6,55 @@
       justify-space-around
       align-start>
       <v-flex xs8 sm8>
-        <v-card>
-          <v-expansion-panel>
-            <v-expansion-panel-content
-              v-for="(item, index) in items"
-              :key="index"
-            >
-              <template v-slot:header>
-                <app-log-summary 
-                  :time="item.time"
-                  :status="item.status"
-                  :method="item.method"
-                  :app="item.app"
-                  :path="item.path"
-                  :responseTime="item.responseTime"
-                  :index="index"
-                  :length="items.length"
-                />
-              </template>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-card>
+        <v-expansion-panel>
+          <v-expansion-panel-content
+            v-for="(log, index) in logs"
+            :key="index"
+          >
+            <template v-slot:header>
+              <log-summary 
+                :time="log.time"
+                :status="log.status"
+                :method="log.method"
+                :app="log.app"
+                :path="log.path"
+                :responseTime="log.responseTime"
+                :index="index"
+                :length="log.length"
+              />
+            </template>
+            <log-detail
+              :req="log.req"
+              :res="log.res"
+            />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'; 
 import LogSummary from './LogSummary';
+import LogDetail from './LogDetail';
 
 export default {
   name: 'List',
   components: {
-    appLogSummary: LogSummary
+    LogSummary,
+    LogDetail,
   },
-  data() {
-    return {
-      selected: [1],
-      items: [{
-        method: 'GET',
-        time: '19:10',
-        status: 200,
-        app: 'NEAT',
-        path: '/games/:id_game/leaderboard',
-        responseTime: 182
-      },
-      {
-        method: 'POST',
-        time: '19:08',
-        status: 400,
-        app: 'NEAT',
-        path: '/games/:id_game/leaderboard',
-        responseTime: 101
-      },
-      {
-        method: 'GET',
-        time: '19:07',
-        status: 200,
-        app: 'NEAT',
-        path: '/games',
-        responseTime: 92
-      },
-      {
-        method: 'POST',
-        time: '19:00',
-        status: 201,
-        app: 'NEAT',
-        path: '/games/:id_game/leaderboard',
-        responseTime: 107
-      }]
-    };
+  created() {
+    this.retrieveLogs(10);
   },
-  props: {
+  computed: {
+    ...mapState('log', {
+      logs: state => state.logs
+    }),
   },
+  methods: {
+    ...mapActions('log', ['retrieveLogs']),
+  }
 };
 </script>

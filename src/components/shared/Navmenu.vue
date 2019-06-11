@@ -12,8 +12,6 @@ export default {
   name: 'Navmenu',
   components: {
   },
-  data() {
-  },
   computed: {
   }
 };
