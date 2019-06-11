@@ -7,7 +7,7 @@
   >
     <v-flex xs4 sm2>
         <div>
-          <h3><v-icon>alarm</v-icon> {{ time }}</h3>
+          <h3><v-icon>alarm</v-icon> {{ time | moment("HH:mm") }}</h3>
         </div>
         <v-chip v-if="status == 200 || status == 201" color="green" text-color="white"  small>
           {{ status }}
@@ -24,7 +24,7 @@
     </v-flex>
 
     <v-flex xs12 sm6>
-        <v-list-tile-title>{{ app }}</v-list-tile-title>
+        <v-list-tile-title>{{ app.charAt(1).toUpperCase() + app.slice(2) }}</v-list-tile-title>
         <v-list-tile-sub-title>{{ path }}</v-list-tile-sub-title>
     </v-flex>
 

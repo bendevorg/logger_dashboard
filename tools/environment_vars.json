@@ -3,15 +3,16 @@
     "NODE_ENV": "'\"mock\"'",
     "HOST": "0.0.0.0",
     "PORT": 3339,
-    "BACKEND_HOST": "'\"http://localhost:3340/api\"'"
+    "BACKEND_HOST": "'\"http://localhost:3106\"'"
   },
   "development":{
     "NODE_ENV": "'\"development\"'",
     "PORT": 3339,
-    "BACKEND_HOST": "'\"http://localhost:3340/api\"'"
+    "BACKEND_HOST": "'\"http://localhost:3106\"'"
   },
   "production":{
     "NODE_ENV": "'\"production\"'",
-    "PORT": 3339
+    "PORT": 3339,
+    "BACKEND_HOST": "'\"http://192.81.211.75:3106\"'"
   }
 }

@@ -4,6 +4,7 @@ import 'vuetify/dist/vuetify.min.css';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
+import VueMoment from 'vue-moment';
 import App from './App.vue';
 import routes from './routes';
 import store from './store';
@@ -12,6 +13,7 @@ Vue.use(Vuetify);
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(Vuex);
+Vue.use(VueMoment);
 
 //Vue.http.options.root = process.env.BACKEND_HOST;
 const router = new VueRouter({
